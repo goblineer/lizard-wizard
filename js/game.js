@@ -20,22 +20,26 @@ gameScene.create = function() {
   let tileset = map.addTilesetImage('background');
   let blocked = map.createStaticLayer('blocked', tileset, 0, 0);
   blocked.setCollisionByProperty({ blocked: true });
-  this.player = this.add.sprite(this.playerMinX, this.playerMinY, 'player');
+  this.player = this.physics.add.sprite(
+    this.playerMinX,
+    this.playerMinY,
+    'player'
+  );
   this.physics.add.collider(this.player, blocked);
 };
 
 gameScene.update = function() {
   if (this.isTerminating) return;
   if (cursors.left.isDown) {
-    this.player.x += this.playerSpeed * -1;
+    this.player.body.setVelocityX(-100);
   } else if (cursors.right.isDown) {
-    this.player.x += this.playerSpeed;
+    this.player.body.setVelocityX(100);
   } else if (cursors.down.isDown) {
-    this.player.y += this.playerSpeed;
+    this.player.body.setVelocityY(100);
   } else if (cursors.up.isDown) {
-    this.player.y += this.playerSpeed * -1;
+    this.player.body.setVelocityY(-100);
   } else {
-    this.player.x += 0;
+    this.player.body.setVelocity(0);
   }
 };
 
