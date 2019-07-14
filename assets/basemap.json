@@ -7,29 +7,19 @@
          "id":3,
          "name":"blocked",
          "opacity":1,
-         "properties":[
-                {
-                 "name":"blocked",
-                 "type":"bool",
-                 "value":true
-                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
          "x":0,
-         "y":0
-        }, 
+         "y":0,
+         "properties":[
         {
-         "id":5,
-         "image":"background.png",
-         "name":"background",
-         "opacity":1,
-         "type":"imagelayer",
-         "visible":true,
-         "x":0,
-         "y":0
+          "name":"blocked",
+          "type":"bool",
+          "value":true
+        }]
         }],
- "nextlayerid":6,
+ "nextlayerid":8,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -47,7 +37,44 @@
          "spacing":0,
          "tilecount":264,
          "tileheight":8,
-         "tilewidth":8
+         "tilewidth":8,
+         "tiles":[
+                {
+                 "id":230,
+                 "properties":[
+                        {
+                         "name":"blocked",
+                         "type":"bool",
+                         "value":true
+                        }]
+                },
+                {
+                 "id":231,
+                 "properties":[
+                        {
+                         "name":"blocked",
+                         "type":"bool",
+                         "value":true
+                        }]
+                },
+                {
+                 "id":242,
+                 "properties":[
+                        {
+                         "name":"blocked",
+                         "type":"bool",
+                         "value":true
+                        }]
+                },
+                {
+                 "id":243,
+                 "properties":[
+                        {
+                         "name":"blocked",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }]
         }],
  "tilewidth":8,
  "type":"map",
