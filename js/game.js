@@ -12,7 +12,10 @@ gameScene.preload = function() {
   this.load.image('tiles', 'assets/tiles.png');
   this.load.image('background', 'assets/background.png');
   this.load.tilemapTiledJSON('map', 'assets/basemap.json');
-  this.load.image('player', 'assets/player.png');
+  this.load.spritesheet('player', 'assets/spritesheet.png', {
+    frameWidth: 28,
+    frameHeight: 28
+  });
 };
 
 gameScene.create = function() {
@@ -20,12 +23,39 @@ gameScene.create = function() {
   let tileset = map.addTilesetImage('background');
   let blocked = map.createStaticLayer('blocked', tileset, 0, 0);
   blocked.setCollisionByProperty({ blocked: true });
+
+  this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: 'up',
+    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: 'down',
+    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+  });
+
   this.player = this.physics.add.sprite(
     this.playerMinX,
     this.playerMinY,
     'player'
   );
   this.physics.add.collider(this.player, blocked);
+  this.player.setScale(1);
 };
 
 gameScene.update = function() {
@@ -40,6 +70,22 @@ gameScene.update = function() {
     this.player.body.setVelocityY(-100);
   } else {
     this.player.body.setVelocity(0);
+  }
+
+  if (cursors.left.isDown) {
+    this.player.anims.play('right', true);
+    this.player.angle = 180;
+  } else if (cursors.right.isDown) {
+    this.player.anims.play('right', true);
+    this.player.angle = 0;
+  } else if (cursors.up.isDown) {
+    this.player.anims.play('right', true);
+    this.player.angle = -90;
+  } else if (cursors.down.isDown) {
+    this.player.anims.play('right', true);
+    this.player.angle = 90;
+  } else {
+    this.player.anims.stop();
   }
 };
 
