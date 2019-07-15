@@ -2,7 +2,7 @@ let gameScene = new Phaser.Scene('Game');
 
 gameScene.init = function() {
   this.playerSpeed = 3;
-  this.playerMinX = this.sys.game.config.width - 600;
+  this.playerMinX = this.sys.game.config.width - 610;
   this.playerMinY = this.sys.game.config.height - 330;
   this.isTerminating = false;
   cursors = this.input.keyboard.createCursorKeys();
@@ -25,41 +25,30 @@ gameScene.create = function() {
   blocked.setCollisionByProperty({ blocked: true });
 
   this.anims.create({
-    key: 'left',
+    key: 'walk',
     frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
     frameRate: 10,
     repeat: -1
   });
-  this.anims.create({
-    key: 'right',
-    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'up',
-    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'down',
-    frames: this.anims.generateFrameNumbers('player', { start: 1, end: 3 }),
-    frameRate: 10,
-    repeat: -1
-  });
+
+  //bring in a sprite and put it at the starting postition
 
   this.player = this.physics.add.sprite(
     this.playerMinX,
     this.playerMinY,
     'player'
   );
+
+  //player's sprite can't go through walls
+
   this.physics.add.collider(this.player, blocked);
-  this.player.setScale(1);
 };
 
 gameScene.update = function() {
   if (this.isTerminating) return;
+
+  //navigate with keyboard arrows
+
   if (cursors.left.isDown) {
     this.player.body.setVelocityX(-100);
   } else if (cursors.right.isDown) {
@@ -72,17 +61,20 @@ gameScene.update = function() {
     this.player.body.setVelocity(0);
   }
 
+  //animate sprite
+  //TODO: set animations so when two directions are pressed at the same time, the best anim shows
+
   if (cursors.left.isDown) {
-    this.player.anims.play('right', true);
+    this.player.anims.play('walk', true);
     this.player.angle = 180;
   } else if (cursors.right.isDown) {
-    this.player.anims.play('right', true);
+    this.player.anims.play('walk', true);
     this.player.angle = 0;
   } else if (cursors.up.isDown) {
-    this.player.anims.play('right', true);
+    this.player.anims.play('walk', true);
     this.player.angle = -90;
   } else if (cursors.down.isDown) {
-    this.player.anims.play('right', true);
+    this.player.anims.play('walk', true);
     this.player.angle = 90;
   } else {
     this.player.anims.stop();
@@ -96,7 +88,7 @@ let config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true
+      debug: false
     }
   },
   scene: gameScene,
