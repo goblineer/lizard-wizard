@@ -8,6 +8,8 @@ gameScene.init = function() {
   cursors = this.input.keyboard.createCursorKeys();
 };
 
+// callbacks for preload
+
 gameScene.preload = function() {
   this.load.image('tiles', 'assets/tiles.png');
   this.load.image('background', 'assets/background.png');
@@ -17,6 +19,8 @@ gameScene.preload = function() {
     frameHeight: 28
   });
 };
+
+// create runs once
 
 gameScene.create = function() {
   map = this.make.tilemap({ key: 'map' });
@@ -39,13 +43,27 @@ gameScene.create = function() {
     'player'
   );
 
-  //player's sprite can't go through walls
+  //sprite can't go through walls
 
   this.physics.add.collider(this.player, blocked);
 };
 
+// update runs continuously
+
 gameScene.update = function() {
   if (this.isTerminating) return;
+
+  this.make.text({
+    x: 480,
+    y: 32,
+    text:
+      'Look at this glorious text and its intelligent wordwrapping properties!',
+    style: {
+      font: '24px Arial',
+      fill: 'white',
+      wordWrap: { width: 150, useAdvancedWrap: true }
+    }
+  });
 
   //navigate with keyboard arrows
 
@@ -81,6 +99,8 @@ gameScene.update = function() {
   }
 };
 
+//set parameters for game
+
 let config = {
   type: Phaser.AUTO,
   width: 640,
@@ -94,5 +114,7 @@ let config = {
   scene: gameScene,
   pixelArt: true
 };
+
+//create game and pass the parameters as config to the new instance
 
 let game = new Phaser.Game(config);
