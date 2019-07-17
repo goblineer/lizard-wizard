@@ -1,0 +1,23 @@
+{
+  "name": "lizard-wizard",
+  "version": "1.0.0",
+  "description": "a game",
+  "main": "./js/game.js",
+  "dependencies": {
+    "phaser": "^3.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goblineer/lizard-wizard.git"
+  },
+  "author": "me",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goblineer/lizard-wizard/issues"
+  },
+  "homepage": "https://github.com/goblineer/lizard-wizard#readme"
+}
